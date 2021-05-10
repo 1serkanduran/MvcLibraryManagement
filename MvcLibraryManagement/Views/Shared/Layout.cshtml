@@ -1,0 +1,73 @@
+﻿
+@{
+    Layout = null;
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+body {font-family: "Lato", sans-serif;}
+
+.sidebar {
+  height: 100%;
+  width: 240px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+.sidebar a {
+  padding: 10px 14px 10px 10px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 240px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+@@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <a href="#"><i class="glyphicon glyphicon-home"></i>&nbsp; Home</a>
+        <a href="#"><i class="glyphicon glyphicon-list"></i>&nbsp; Category</a>
+        <a href="#"><i class="glyphicon glyphicon-book"></i>&nbsp; Books</a>
+        <a href="#"><i class="glyphicon glyphicon-pencil"></i>&nbsp; Writers</a>
+        <a href="#"><i class="glyphicon glyphicon-user"></i>&nbsp; Members</a>
+        <a href="#"><i class="glyphicon glyphicon-tower"></i>&nbsp; Staffs</a>
+        <a href="#"><i class="glyphicon glyphicon-circle-arrow-right"></i>&nbsp; Lend a Book</a>
+        <a href="#"><i class="glyphicon glyphicon-circle-arrow-left"></i>&nbsp; Borrow a Book</a>
+        <a href="#"><i class="glyphicon glyphicon-euro"></i>&nbsp; Safe</a>
+        <a href="#"><i class="glyphicon glyphicon-cog"></i>&nbsp; Transactions</a>
+        <a href="#"><i class="glyphicon glyphicon-dashboard"></i>&nbsp; Settings</a>
+        <a href="#"><i class="glyphicon glyphicon-phone"></i>&nbsp; Help</a>
+        <a href="#"><i class="glyphicon glyphicon-log-out"></i>&nbsp; Logout</a>
+    </div>
+
+    <div class="main">
+       @RenderBody()
+    </div>
+
+</body>
+</html>
+

@@ -1,0 +1,546 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBLibraryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TblBook">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Category" Type="tinyint" />
+          <Property Name="Writer" Type="int" />
+          <Property Name="PritingYear" Type="char" MaxLength="4" />
+          <Property Name="Publisher" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PagesNumber" Type="varchar" MaxLength="4" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="TblCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TblFine">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Member" Type="int" />
+          <Property Name="Start" Type="smalldatetime" />
+          <Property Name="Finish" Type="smalldatetime" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Move" Type="int" />
+        </EntityType>
+        <EntityType Name="TblMember">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+          <Property Name="Surname" Type="varchar" MaxLength="20" />
+          <Property Name="Mail" Type="varchar" MaxLength="50" />
+          <Property Name="Username" Type="varchar" MaxLength="20" />
+          <Property Name="Password" Type="varchar" MaxLength="20" />
+          <Property Name="PhotoURL" Type="varchar" MaxLength="250" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="School" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TblMove">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Book" Type="int" />
+          <Property Name="Member" Type="int" />
+          <Property Name="Staff" Type="int" />
+          <Property Name="PurchaseDate" Type="smalldatetime" />
+          <Property Name="ReturnDate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="TblSafe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Moon" Type="varchar" MaxLength="20" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="TblStaff">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Staff" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TblWriter">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" />
+          <Property Name="Surname" Type="varchar" MaxLength="30" />
+          <Property Name="Detail" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <Association Name="FK_TblBook_TblCategory">
+          <End Role="TblCategory" Type="Self.TblCategory" Multiplicity="0..1" />
+          <End Role="TblBook" Type="Self.TblBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TblBook">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblBook_TblWriter">
+          <End Role="TblWriter" Type="Self.TblWriter" Multiplicity="0..1" />
+          <End Role="TblBook" Type="Self.TblBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblWriter">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TblBook">
+              <PropertyRef Name="Writer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblFine_TblMember1">
+          <End Role="TblMember" Type="Self.TblMember" Multiplicity="0..1" />
+          <End Role="TblFine" Type="Self.TblFine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblMember">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TblFine">
+              <PropertyRef Name="Member" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblFine_TblMove">
+          <End Role="TblMove" Type="Self.TblMove" Multiplicity="0..1" />
+          <End Role="TblFine" Type="Self.TblFine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblMove">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TblFine">
+              <PropertyRef Name="Move" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblMove_TblBook">
+          <End Role="TblBook" Type="Self.TblBook" Multiplicity="0..1" />
+          <End Role="TblMove" Type="Self.TblMove" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblBook">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TblMove">
+              <PropertyRef Name="Book" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblMove_TblMember">
+          <End Role="TblMember" Type="Self.TblMember" Multiplicity="0..1" />
+          <End Role="TblMove" Type="Self.TblMove" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblMember">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TblMove">
+              <PropertyRef Name="Member" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBLibraryModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblBook" EntityType="Self.TblBook" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblCategory" EntityType="Self.TblCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblFine" EntityType="Self.TblFine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblMember" EntityType="Self.TblMember" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblMove" EntityType="Self.TblMove" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblSafe" EntityType="Self.TblSafe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblStaff" EntityType="Self.TblStaff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblWriter" EntityType="Self.TblWriter" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TblBook_TblCategory" Association="Self.FK_TblBook_TblCategory">
+            <End Role="TblCategory" EntitySet="TblCategory" />
+            <End Role="TblBook" EntitySet="TblBook" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblBook_TblWriter" Association="Self.FK_TblBook_TblWriter">
+            <End Role="TblWriter" EntitySet="TblWriter" />
+            <End Role="TblBook" EntitySet="TblBook" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblFine_TblMember1" Association="Self.FK_TblFine_TblMember1">
+            <End Role="TblMember" EntitySet="TblMember" />
+            <End Role="TblFine" EntitySet="TblFine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblFine_TblMove" Association="Self.FK_TblFine_TblMove">
+            <End Role="TblMove" EntitySet="TblMove" />
+            <End Role="TblFine" EntitySet="TblFine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblMove_TblBook" Association="Self.FK_TblMove_TblBook">
+            <End Role="TblBook" EntitySet="TblBook" />
+            <End Role="TblMove" EntitySet="TblMove" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblMove_TblMember" Association="Self.FK_TblMove_TblMember">
+            <End Role="TblMember" EntitySet="TblMember" />
+            <End Role="TblMove" EntitySet="TblMove" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBLibraryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TblBook">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Category" Type="Byte" />
+          <Property Name="Writer" Type="Int32" />
+          <Property Name="PritingYear" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="Publisher" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PagesNumber" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="TblCategory" Relationship="Self.FK_TblBook_TblCategory" FromRole="TblBook" ToRole="TblCategory" />
+          <NavigationProperty Name="TblWriter" Relationship="Self.FK_TblBook_TblWriter" FromRole="TblBook" ToRole="TblWriter" />
+          <NavigationProperty Name="TblMove" Relationship="Self.FK_TblMove_TblBook" FromRole="TblBook" ToRole="TblMove" />
+        </EntityType>
+        <EntityType Name="TblCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TblBook" Relationship="Self.FK_TblBook_TblCategory" FromRole="TblCategory" ToRole="TblBook" />
+        </EntityType>
+        <EntityType Name="TblFine">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Member" Type="Int32" />
+          <Property Name="Start" Type="DateTime" Precision="0" />
+          <Property Name="Finish" Type="DateTime" Precision="0" />
+          <Property Name="Money" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Move" Type="Int32" />
+          <NavigationProperty Name="TblMove" Relationship="Self.FK_TblFine_TblMove" FromRole="TblFine" ToRole="TblMove" />
+          <NavigationProperty Name="TblMember" Relationship="DBLibraryModel.FK_TblFine_TblMember1" FromRole="TblFine" ToRole="TblMember" />
+        </EntityType>
+        <EntityType Name="TblMember">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PhotoURL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="School" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TblMove" Relationship="Self.FK_TblMove_TblMember" FromRole="TblMember" ToRole="TblMove" />
+          <NavigationProperty Name="TblFine" Relationship="DBLibraryModel.FK_TblFine_TblMember1" FromRole="TblMember" ToRole="TblFine" />
+        </EntityType>
+        <EntityType Name="TblMove">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Book" Type="Int32" />
+          <Property Name="Member" Type="Int32" />
+          <Property Name="Staff" Type="Int32" />
+          <Property Name="PurchaseDate" Type="DateTime" Precision="0" />
+          <Property Name="ReturnDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="TblBook" Relationship="Self.FK_TblMove_TblBook" FromRole="TblMove" ToRole="TblBook" />
+          <NavigationProperty Name="TblFine" Relationship="Self.FK_TblFine_TblMove" FromRole="TblMove" ToRole="TblFine" />
+          <NavigationProperty Name="TblMember" Relationship="Self.FK_TblMove_TblMember" FromRole="TblMove" ToRole="TblMember" />
+        </EntityType>
+        <EntityType Name="TblSafe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Moon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="TblStaff">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Staff" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TblWriter">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Detail" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TblBook" Relationship="Self.FK_TblBook_TblWriter" FromRole="TblWriter" ToRole="TblBook" />
+        </EntityType>
+        <Association Name="FK_TblBook_TblCategory">
+          <End Role="TblCategory" Type="Self.TblCategory" Multiplicity="0..1" />
+          <End Role="TblBook" Type="Self.TblBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TblBook">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblBook_TblWriter">
+          <End Role="TblWriter" Type="Self.TblWriter" Multiplicity="0..1" />
+          <End Role="TblBook" Type="Self.TblBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblWriter">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TblBook">
+              <PropertyRef Name="Writer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblMove_TblBook">
+          <End Role="TblBook" Type="Self.TblBook" Multiplicity="0..1" />
+          <End Role="TblMove" Type="Self.TblMove" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblBook">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TblMove">
+              <PropertyRef Name="Book" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblFine_TblMove">
+          <End Role="TblMove" Type="Self.TblMove" Multiplicity="0..1" />
+          <End Role="TblFine" Type="Self.TblFine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblMove">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TblFine">
+              <PropertyRef Name="Move" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblMove_TblMember">
+          <End Role="TblMember" Type="Self.TblMember" Multiplicity="0..1" />
+          <End Role="TblMove" Type="Self.TblMove" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblMember">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TblMove">
+              <PropertyRef Name="Member" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBLibraryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TblBook" EntityType="Self.TblBook" />
+          <EntitySet Name="TblCategory" EntityType="Self.TblCategory" />
+          <EntitySet Name="TblFine" EntityType="Self.TblFine" />
+          <EntitySet Name="TblMember" EntityType="Self.TblMember" />
+          <EntitySet Name="TblMove" EntityType="Self.TblMove" />
+          <EntitySet Name="TblSafe" EntityType="Self.TblSafe" />
+          <EntitySet Name="TblStaff" EntityType="Self.TblStaff" />
+          <EntitySet Name="TblWriter" EntityType="Self.TblWriter" />
+          <AssociationSet Name="FK_TblBook_TblCategory" Association="Self.FK_TblBook_TblCategory">
+            <End Role="TblCategory" EntitySet="TblCategory" />
+            <End Role="TblBook" EntitySet="TblBook" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblBook_TblWriter" Association="Self.FK_TblBook_TblWriter">
+            <End Role="TblWriter" EntitySet="TblWriter" />
+            <End Role="TblBook" EntitySet="TblBook" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblMove_TblBook" Association="Self.FK_TblMove_TblBook">
+            <End Role="TblBook" EntitySet="TblBook" />
+            <End Role="TblMove" EntitySet="TblMove" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblFine_TblMove" Association="Self.FK_TblFine_TblMove">
+            <End Role="TblMove" EntitySet="TblMove" />
+            <End Role="TblFine" EntitySet="TblFine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblMove_TblMember" Association="Self.FK_TblMove_TblMember">
+            <End Role="TblMember" EntitySet="TblMember" />
+            <End Role="TblMove" EntitySet="TblMove" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblFine_TblMember1" Association="DBLibraryModel.FK_TblFine_TblMember1">
+            <End Role="TblMember" EntitySet="TblMember" />
+            <End Role="TblFine" EntitySet="TblFine" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_TblFine_TblMember1">
+          <End Type="DBLibraryModel.TblMember" Role="TblMember" Multiplicity="0..1" />
+          <End Type="DBLibraryModel.TblFine" Role="TblFine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblMember">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TblFine">
+              <PropertyRef Name="Member" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBLibraryModelStoreContainer" CdmEntityContainer="DBLibraryEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DBLibraryModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblBook">
+            <EntityTypeMapping TypeName="DBLibraryModel.TblBook">
+              <MappingFragment StoreEntitySet="TblBook">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Writer" ColumnName="Writer" />
+                <ScalarProperty Name="PritingYear" ColumnName="PritingYear" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="PagesNumber" ColumnName="PagesNumber" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblCategory">
+            <EntityTypeMapping TypeName="DBLibraryModel.TblCategory">
+              <MappingFragment StoreEntitySet="TblCategory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblFine">
+            <EntityTypeMapping TypeName="DBLibraryModel.TblFine">
+              <MappingFragment StoreEntitySet="TblFine">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Member" ColumnName="Member" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="Finish" ColumnName="Finish" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Move" ColumnName="Move" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblMember">
+            <EntityTypeMapping TypeName="DBLibraryModel.TblMember">
+              <MappingFragment StoreEntitySet="TblMember">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PhotoURL" ColumnName="PhotoURL" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="School" ColumnName="School" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblMove">
+            <EntityTypeMapping TypeName="DBLibraryModel.TblMove">
+              <MappingFragment StoreEntitySet="TblMove">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Book" ColumnName="Book" />
+                <ScalarProperty Name="Member" ColumnName="Member" />
+                <ScalarProperty Name="Staff" ColumnName="Staff" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblSafe">
+            <EntityTypeMapping TypeName="DBLibraryModel.TblSafe">
+              <MappingFragment StoreEntitySet="TblSafe">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Moon" ColumnName="Moon" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblStaff">
+            <EntityTypeMapping TypeName="DBLibraryModel.TblStaff">
+              <MappingFragment StoreEntitySet="TblStaff">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Staff" ColumnName="Staff" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblWriter">
+            <EntityTypeMapping TypeName="DBLibraryModel.TblWriter">
+              <MappingFragment StoreEntitySet="TblWriter">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
