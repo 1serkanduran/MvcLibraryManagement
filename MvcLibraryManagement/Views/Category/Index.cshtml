@@ -1,8 +1,27 @@
-﻿
+﻿@using MvcLibraryManagement.Models.Entity
+@model List<TblCategory>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Category Operation</h2>
 
+<table class="table table-bordered">
+    <tr>
+        <th>Category ID</th>
+        <th>Category Name</th>
+        <th>Delete</th>
+        <th>Update</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td>@item.Name</td>
+            <td><a href="/Category/CategoryDelete/@item.ID" class="btn btn-danger">Delete</a></td>
+            <td><a href="/Category/CategoryBring/@item.ID" class="btn btn-warning">Update</a></td>
+        </tr>
+    }
+</table>
+<a href="/Category/CategoryAdd/" class="btn btn-primary">New Category</a>

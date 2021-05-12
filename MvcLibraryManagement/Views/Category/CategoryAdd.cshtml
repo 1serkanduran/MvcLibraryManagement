@@ -1,0 +1,15 @@
+﻿@model MvcLibraryManagement.Models.Entity.TblCategory
+@{
+    ViewBag.Title = "CategoryAdd";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<form class="form-group" method="post">
+    <div>
+        <label>Category Name</label>
+        <input type="text" class="form-control" name="Name" />
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn btn-info" id="btn1">Category Add</button>
+    </div>
+</form>
