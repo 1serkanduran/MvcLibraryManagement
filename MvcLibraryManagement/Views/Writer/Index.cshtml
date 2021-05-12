@@ -1,0 +1,31 @@
+﻿@using MvcLibraryManagement.Models.Entity
+@model List<TblWriter>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Writers</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Writer ID</th>
+        <th>Writer Name</th>
+        <th>Writer Surname</th>
+        <th>Writer Detail</th>
+        <th>Delete</th>
+        <th>Update</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td>@item.Name</td>
+            <td>@item.Surname</td>
+            <td>@item.Detail</td>
+            <td>@Html.ActionLink("Delete","WriterDelete", new {id=item.ID }, new {@class = "btn btn-danger", onclick="return confirm('Silmek İstiyor musunuz?')" })</td>
+            <td><a href="/Writer/WriterBring/@item.ID" class="btn btn-warning">Update</a></td>
+        </tr>
+    }
+</table>
+<a href="/Writer/WriterAdd/" class="btn btn-primary">New Writer</a>
