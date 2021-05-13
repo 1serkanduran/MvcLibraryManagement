@@ -1,0 +1,42 @@
+﻿@model MvcLibraryManagement.Models.Entity.TblMember
+@{
+    ViewBag.Title = "MemberBring";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@using (Html.BeginForm("MemberUpdate", "Member", FormMethod.Post))
+{
+    <div style="margin-top:15px;"></div>
+    <div class="form-group">
+        @Html.LabelFor(w => w.ID)
+        @Html.TextBoxFor(w => w.ID, new { @class = "form-control", @ReadOnly = "true" })
+        <br />
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.Surname)
+        @Html.TextBoxFor(m => m.Surname, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.Mail)
+        @Html.TextBoxFor(m => m.Mail, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.Username)
+        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.Password)
+        @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.PhotoURL)
+        @Html.TextBoxFor(m => m.PhotoURL, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.Phone)
+        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.School)
+        @Html.TextBoxFor(m => m.School, new { @class = "form-control" })
+    </div>
+    <div>
+        <button class="btn btn-success">Update</button>
+    </div>
+}
+

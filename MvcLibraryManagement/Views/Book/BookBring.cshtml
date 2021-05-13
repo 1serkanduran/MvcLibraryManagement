@@ -1,0 +1,36 @@
+﻿@model MvcLibraryManagement.Models.Entity.TblBook
+@{
+    ViewBag.Title = "BookBring";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@using (Html.BeginForm("BookUpdate", "Book", FormMethod.Post))
+{
+    <div style="margin-top:15px;"></div>
+    <div class="form-group">
+        @Html.LabelFor(w => w.ID)
+        @Html.TextBoxFor(w => w.ID, new { @class = "form-control", @ReadOnly = "true" })
+        <br />
+        @Html.LabelFor(w => w.Name)
+        @Html.TextBoxFor(w => w.Name, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(w => w.Category)
+        @Html.DropDownListFor(k => k.TblCategory.ID, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(w => w.Writer)
+        @Html.DropDownListFor(k => k.TblWriter.ID, (List<SelectListItem>)ViewBag.dgr2, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(w => w.PritingYear)
+        @Html.TextBoxFor(w => w.PritingYear, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(w => w.Publisher)
+        @Html.TextBoxFor(w => w.Publisher, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(w => w.PagesNumber)
+        @Html.TextBoxFor(w => w.PagesNumber, new { @class = "form-control" })
+    </div>
+    <div>
+        <button class="btn btn-success">Update</button>
+    </div>
+}
+

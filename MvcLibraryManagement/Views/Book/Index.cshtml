@@ -1,0 +1,48 @@
+﻿@using MvcLibraryManagement.Models.Entity
+@model List<TblBook>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Book Oparations</h2>
+
+@using (Html.BeginForm("Index", "Book", FormMethod.Get))
+{
+    <div style="margin-top:15px; margin-bottom:15px;">
+        <b>Find: </b>@Html.TextBox("p")
+        <input type="submit" value="Find" />
+    </div>
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Writer</th>
+        <th>Printing Year</th>
+        <th>Publisher</th>
+        <th>Pages Numbers</th>
+        <th>Status</th>
+        <th>Delete</th>
+        <th>Update</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td>@item.Name</td>
+            <td>@item.TblCategory.Name</td>
+            <td>@item.TblWriter.Name @item.TblWriter.Surname</td>
+            <td>@item.PritingYear</td>
+            <td>@item.Publisher</td>
+            <td>@item.PagesNumber</td>
+            <td>@item.Status</td>
+            <td>@Html.ActionLink("Delete", "BookDelete", new { id = item.ID }, new { @class = "btn btn-danger", onclick = "return confirm('Silmek İstiyor musunuz?')" })</td>
+            <td><a href="/Book/BookBring/@item.ID" class="btn btn-warning">Update</a></td>
+        </tr>
+    }
+</table>
+
+<a href="/Book/BookAdd/" class="btn btn-primary">New Book</a>

@@ -1,0 +1,28 @@
+﻿@using MvcLibraryManagement.Models.Entity
+@model List<TblStaff>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Category Operation</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Staff ID</th>
+        <th>Staff</th>
+        <th>Delete</th>
+        <th>Update</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td>@item.Staff</td>
+            <td>@Html.ActionLink("Delete", "StaffDelete", new { id = item.ID }, new { @class = "btn btn-danger", onclick = "return confirm('Silmek İstiyor musunuz?')" })</td>
+            <td><a href="/Staff/StaffBring/@item.ID" class="btn btn-warning">Update</a></td>
+        </tr>
+    }
+</table>
+<a href="/Staff/StaffAdd/" class="btn btn-primary">New Category</a>
+

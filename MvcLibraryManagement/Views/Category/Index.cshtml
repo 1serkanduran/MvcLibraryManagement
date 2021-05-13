@@ -16,12 +16,12 @@
     </tr>
     @foreach (var item in Model)
     {
-        <tr>
-            <td>@item.ID</td>
-            <td>@item.Name</td>
-            <td><a href="/Category/CategoryDelete/@item.ID" class="btn btn-danger">Delete</a></td>
-            <td><a href="/Category/CategoryBring/@item.ID" class="btn btn-warning">Update</a></td>
-        </tr>
+    <tr>
+        <td>@item.ID</td>
+        <td>@item.Name</td>
+        <td>@Html.ActionLink("Delete", "CategoryDelete", new { id = item.ID }, new { @class = "btn btn-danger", onclick = "return confirm('Silmek İstiyor musunuz?')" })</td>
+        <td><a href="/Category/CategoryBring/@item.ID" class="btn btn-warning">Update</a></td>
+    </tr>
     }
 </table>
 <a href="/Category/CategoryAdd/" class="btn btn-primary">New Category</a>

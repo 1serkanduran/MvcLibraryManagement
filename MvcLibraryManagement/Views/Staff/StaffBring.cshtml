@@ -1,0 +1,21 @@
+﻿@model MvcLibraryManagement.Models.Entity.TblStaff
+@{
+    ViewBag.Title = "StaffBring";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@using (Html.BeginForm("StaffUpdate", "Staff", FormMethod.Post))
+{
+    <div style="margin-top:15px;"></div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.ID)
+        @Html.TextBoxFor(s => s.ID, new { @class = "form-control", @ReadOnly = "true" })
+        <br />
+        @Html.LabelFor(s =>s.Staff)
+        @Html.TextBoxFor(s => s.Staff, new { @class = "form-control" })
+    </div>
+    <div>
+        <button class="btn btn-success">Update</button>
+    </div>
+}
+

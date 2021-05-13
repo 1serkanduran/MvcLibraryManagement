@@ -1,0 +1,37 @@
+﻿@model MvcLibraryManagement.Models.Entity.TblBook
+@{
+    ViewBag.Title = "BookAdd";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<form class="form-group" method="post">
+    <div></div>
+    <div style="margin-top:15px;">
+        <label>Book Name</label>
+        @Html.TextBoxFor(b => b.Name, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Book Category</label>
+        @Html.DropDownListFor(k=>k.TblCategory.ID,(List<SelectListItem>)ViewBag.dgr1, new { @class= "form-control"})
+    </div>
+    <div style="margin-top:15px;">
+        <label>Book Writer</label>
+        @Html.DropDownListFor(k => k.TblWriter.ID, (List<SelectListItem>)ViewBag.dgr2, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Printing Year</label>
+        @Html.TextAreaFor(b => b.PritingYear, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Publisher</label>
+        @Html.TextAreaFor(b => b.Publisher, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Pages Numbers</label>
+        @Html.TextAreaFor(b => b.PagesNumber, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <button class="btn btn-info">Book Add</button>
+    </div>
+</form>
+

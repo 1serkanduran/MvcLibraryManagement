@@ -11,10 +11,12 @@ namespace MvcLibraryManagement.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class TblStaff
     {
         public byte ID { get; set; }
+        [Required(ErrorMessage = "Staff name cannot be empty")]
         public string Staff { get; set; }
     }
 }

@@ -1,0 +1,44 @@
+﻿@using MvcLibraryManagement.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<TblMember>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Members Operation</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Member ID</th>
+        <th>Member Name</th>
+        <th>Member Surname</th>
+        <th>Member Mail</th>
+        <th>Member Username</th>
+        <th>Member Password</th>
+        <th>Phone</th>
+        <th>School</th>
+        <th>Delete</th>
+        <th>Update</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td>@item.Name</td>
+            <td>@item.Surname</td>
+            <td>@item.Mail</td>
+            <td>@item.Username</td>
+            <td>@item.Password</td>
+            <td>@item.Phone</td>
+            <td>@item.School</td>
+            <td>@Html.ActionLink("Delete", "MemberDelete", new { id = item.ID }, new { @class = "btn btn-danger", onclick = "return confirm('Silmek İstiyor musunuz?')" })</td>
+            <td><a href="/Member/MemberBring/@item.ID" class="btn btn-warning">Update</a></td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+
+<a href="/Member/MemberAdd/" class="btn btn-primary">New Member</a>
+

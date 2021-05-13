@@ -1,0 +1,46 @@
+﻿@model MvcLibraryManagement.Models.Entity.TblMember
+@{
+    ViewBag.Title = "MemberAdd";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<form class="form-group" method="post">
+    <div></div>
+    <div style="margin-top:15px;">
+        <label>Member Name</label>
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Name, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Member Surname</label>
+        @Html.TextBoxFor(m => m.Surname, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Member Mail</label>
+        @Html.TextBoxFor(m => m.Mail, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Member Username</label>
+        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Member Password</label>
+        @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Member Phone</label>
+        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Member Photo</label>
+        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Member School</label>
+        @Html.TextBoxFor(m => m.School, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <button class="btn btn-info">Writer Add</button>
+    </div>
+</form>
+
