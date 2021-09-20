@@ -20,6 +20,7 @@
         <AssociationConnector Association="DBLibraryModel.FK_TblFine_TblMove" ManuallyRouted="false" />
         <AssociationConnector Association="DBLibraryModel.FK_TblMove_TblMember" ManuallyRouted="false" />
         <AssociationConnector Association="DBLibraryModel.FK_TblFine_TblMember1" />
+        <AssociationConnector Association="DBLibraryModel.FK_TblMove_TblStaff" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,0 +1,38 @@
+﻿@model MvcLibraryManagement.Models.Entity.TblMove
+@{
+    ViewBag.Title = "ReturnBook";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Return Book</h2>
+
+@using (Html.BeginForm("ReturnBookUpdate", "Loan", FormMethod.Post))
+{
+    <div style="margin-top:15px;"></div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.ID)
+        @Html.TextBoxFor(s => s.ID, new { @class = "form-control", @ReadOnly = "true" })
+        <br />
+        <label>Book Name</label>
+        @Html.TextBoxFor(s => s.TblBook.Name, new { @class = "form-control" })
+        <br />
+        <label>Member Name</label>
+        @Html.TextBoxFor(s => s.TblMember.Name, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(s => s.TblStaff.Staff)
+        @Html.TextBoxFor(s => s.TblStaff.Staff, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(s => s.PurchaseDate)
+        @Html.TextBoxFor(s => s.PurchaseDate, "{0: dd.MM.yyyy}", new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(s => s.ReturnDate)
+        @Html.TextBoxFor(s => s.ReturnDate, "{0: dd.MM.yyyy}", new { @class = "form-control" })
+        <br />
+        <label>The date brought by the member</label>
+        <input type="text" class="form-control" name="MemberReturnDate" value="@DateTime.Now.ToShortDateString()" />
+    </div>
+    <div>
+        <button class="btn btn-success">Return Book</button>
+    </div>
+}
+

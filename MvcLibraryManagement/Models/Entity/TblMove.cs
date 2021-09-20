@@ -23,13 +23,16 @@ namespace MvcLibraryManagement.Models.Entity
         public int ID { get; set; }
         public Nullable<int> Book { get; set; }
         public Nullable<int> Member { get; set; }
-        public Nullable<int> Staff { get; set; }
+        public Nullable<byte> Staff { get; set; }
         public Nullable<System.DateTime> PurchaseDate { get; set; }
         public Nullable<System.DateTime> ReturnDate { get; set; }
+        public Nullable<bool> TransactionStatus { get; set; }
+        public Nullable<System.DateTime> MemberReturnDate { get; set; }
     
         public virtual TblBook TblBook { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblFine> TblFine { get; set; }
         public virtual TblMember TblMember { get; set; }
+        public virtual TblStaff TblStaff { get; set; }
     }
 }

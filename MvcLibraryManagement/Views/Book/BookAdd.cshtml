@@ -20,18 +20,19 @@
     </div>
     <div style="margin-top:15px;">
         <label>Printing Year</label>
-        @Html.TextAreaFor(b => b.PritingYear, new { @class = "form-control" })
+        @Html.TextBoxFor(b => b.PritingYear, new { @class = "form-control" })
     </div>
     <div style="margin-top:15px;">
         <label>Publisher</label>
-        @Html.TextAreaFor(b => b.Publisher, new { @class = "form-control" })
+        @Html.TextBoxFor(b => b.Publisher, new { @class = "form-control" })
     </div>
     <div style="margin-top:15px;">
         <label>Pages Numbers</label>
-        @Html.TextAreaFor(b => b.PagesNumber, new { @class = "form-control" })
+        @Html.TextBoxFor(b => b.PagesNumber, new { @class = "form-control" })
     </div>
     <div style="margin-top:15px;">
         <button class="btn btn-info">Book Add</button>
     </div>
+    <input type="hidden" name="Status" value="True" />
 </form>
 

@@ -11,12 +11,19 @@ namespace MvcLibraryManagement.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class TblStaff
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TblStaff()
+        {
+            this.TblMove = new HashSet<TblMove>();
+        }
+    
         public byte ID { get; set; }
-        [Required(ErrorMessage = "Staff name cannot be empty")]
         public string Staff { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblMove> TblMove { get; set; }
     }
 }

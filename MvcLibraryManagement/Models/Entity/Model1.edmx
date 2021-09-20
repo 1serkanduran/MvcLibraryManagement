@@ -67,9 +67,11 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Book" Type="int" />
           <Property Name="Member" Type="int" />
-          <Property Name="Staff" Type="int" />
+          <Property Name="Staff" Type="tinyint" />
           <Property Name="PurchaseDate" Type="smalldatetime" />
           <Property Name="ReturnDate" Type="smalldatetime" />
+          <Property Name="MemberReturnDate" Type="smalldatetime" />
+          <Property Name="TransactionStatus" Type="bit" />
         </EntityType>
         <EntityType Name="TblSafe">
           <Key>
@@ -167,6 +169,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TblMove_TblStaff">
+          <End Role="TblStaff" Type="Self.TblStaff" Multiplicity="0..1" />
+          <End Role="TblMove" Type="Self.TblMove" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblStaff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TblMove">
+              <PropertyRef Name="Staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DBLibraryModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblBook" EntityType="Self.TblBook" Schema="dbo" store:Type="Tables" />
@@ -199,6 +213,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_TblMove_TblMember" Association="Self.FK_TblMove_TblMember">
             <End Role="TblMember" EntitySet="TblMember" />
+            <End Role="TblMove" EntitySet="TblMove" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblMove_TblStaff" Association="Self.FK_TblMove_TblStaff">
+            <End Role="TblStaff" EntitySet="TblStaff" />
             <End Role="TblMove" EntitySet="TblMove" />
           </AssociationSet>
         </EntityContainer>
@@ -276,12 +294,15 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Book" Type="Int32" />
           <Property Name="Member" Type="Int32" />
-          <Property Name="Staff" Type="Int32" />
+          <Property Name="Staff" Type="Byte" />
           <Property Name="PurchaseDate" Type="DateTime" Precision="0" />
           <Property Name="ReturnDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="TblBook" Relationship="Self.FK_TblMove_TblBook" FromRole="TblMove" ToRole="TblBook" />
           <NavigationProperty Name="TblFine" Relationship="Self.FK_TblFine_TblMove" FromRole="TblMove" ToRole="TblFine" />
           <NavigationProperty Name="TblMember" Relationship="Self.FK_TblMove_TblMember" FromRole="TblMove" ToRole="TblMember" />
+          <NavigationProperty Name="TblStaff" Relationship="DBLibraryModel.FK_TblMove_TblStaff" FromRole="TblMove" ToRole="TblStaff" />
+          <Property Name="TransactionStatus" Type="Boolean" />
+          <Property Name="MemberReturnDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="TblSafe">
           <Key>
@@ -297,6 +318,7 @@
           </Key>
           <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Staff" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TblMove" Relationship="DBLibraryModel.FK_TblMove_TblStaff" FromRole="TblStaff" ToRole="TblMove" />
         </EntityType>
         <EntityType Name="TblWriter">
           <Key>
@@ -402,6 +424,10 @@
             <End Role="TblMember" EntitySet="TblMember" />
             <End Role="TblFine" EntitySet="TblFine" />
           </AssociationSet>
+          <AssociationSet Name="FK_TblMove_TblStaff" Association="DBLibraryModel.FK_TblMove_TblStaff">
+            <End Role="TblStaff" EntitySet="TblStaff" />
+            <End Role="TblMove" EntitySet="TblMove" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_TblFine_TblMember1">
           <End Type="DBLibraryModel.TblMember" Role="TblMember" Multiplicity="0..1" />
@@ -412,6 +438,18 @@
             </Principal>
             <Dependent Role="TblFine">
               <PropertyRef Name="Member" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblMove_TblStaff">
+          <End Type="DBLibraryModel.TblStaff" Role="TblStaff" Multiplicity="0..1" />
+          <End Type="DBLibraryModel.TblMove" Role="TblMove" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblStaff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TblMove">
+              <PropertyRef Name="Staff" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -484,6 +522,8 @@
           <EntitySetMapping Name="TblMove">
             <EntityTypeMapping TypeName="DBLibraryModel.TblMove">
               <MappingFragment StoreEntitySet="TblMove">
+                <ScalarProperty Name="MemberReturnDate" ColumnName="MemberReturnDate" />
+                <ScalarProperty Name="TransactionStatus" ColumnName="TransactionStatus" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Book" ColumnName="Book" />
                 <ScalarProperty Name="Member" ColumnName="Member" />

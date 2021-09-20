@@ -85,6 +85,7 @@ namespace MvcLibraryManagement.Controllers
             book.PritingYear = p.PritingYear;
             book.PagesNumber = p.PagesNumber;
             book.Publisher = p.Publisher;
+            book.Status = true;
             var ctg = db.TblCategory.Where(c => c.ID == p.TblCategory.ID).FirstOrDefault();
             var wrt = db.TblWriter.Where(w => w.ID == p.TblWriter.ID).FirstOrDefault();
             book.Category = ctg.ID;
