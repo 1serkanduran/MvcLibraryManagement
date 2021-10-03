@@ -15,6 +15,13 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="TblAbout">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="About" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="TblBook">
           <Key>
             <PropertyRef Name="ID" />
@@ -27,6 +34,7 @@
           <Property Name="Publisher" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PagesNumber" Type="varchar" MaxLength="4" />
           <Property Name="Status" Type="bit" />
+          <Property Name="BookImage" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="TblCategory">
           <Key>
@@ -34,6 +42,16 @@
           </Key>
           <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TblContact">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="Message" Type="varchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="TblFine">
           <Key>
@@ -183,8 +201,10 @@
         </Association>
         <EntityContainer Name="DBLibraryModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblAbout" EntityType="Self.TblAbout" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblBook" EntityType="Self.TblBook" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblCategory" EntityType="Self.TblCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblContact" EntityType="Self.TblContact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblFine" EntityType="Self.TblFine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblMember" EntityType="Self.TblMember" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblMove" EntityType="Self.TblMove" Schema="dbo" store:Type="Tables" />
@@ -249,6 +269,7 @@
           <NavigationProperty Name="TblCategory" Relationship="Self.FK_TblBook_TblCategory" FromRole="TblBook" ToRole="TblCategory" />
           <NavigationProperty Name="TblWriter" Relationship="Self.FK_TblBook_TblWriter" FromRole="TblBook" ToRole="TblWriter" />
           <NavigationProperty Name="TblMove" Relationship="Self.FK_TblMove_TblBook" FromRole="TblBook" ToRole="TblMove" />
+          <Property Name="BookImage" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="TblCategory">
           <Key>
@@ -428,6 +449,8 @@
             <End Role="TblStaff" EntitySet="TblStaff" />
             <End Role="TblMove" EntitySet="TblMove" />
           </AssociationSet>
+          <EntitySet Name="TblAbout" EntityType="DBLibraryModel.TblAbout" />
+          <EntitySet Name="TblContact" EntityType="DBLibraryModel.TblContact" />
         </EntityContainer>
         <Association Name="FK_TblFine_TblMember1">
           <End Type="DBLibraryModel.TblMember" Role="TblMember" Multiplicity="0..1" />
@@ -453,6 +476,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TblAbout">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="About" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TblContact">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -473,6 +513,7 @@
           <EntitySetMapping Name="TblBook">
             <EntityTypeMapping TypeName="DBLibraryModel.TblBook">
               <MappingFragment StoreEntitySet="TblBook">
+                <ScalarProperty Name="BookImage" ColumnName="BookImage" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
@@ -557,6 +598,25 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Detail" ColumnName="Detail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblAbout">
+            <EntityTypeMapping TypeName="DBLibraryModel.TblAbout">
+              <MappingFragment StoreEntitySet="TblAbout">
+                <ScalarProperty Name="About" ColumnName="About" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblContact">
+            <EntityTypeMapping TypeName="DBLibraryModel.TblContact">
+              <MappingFragment StoreEntitySet="TblContact">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

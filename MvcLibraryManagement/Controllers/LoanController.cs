@@ -13,7 +13,7 @@ namespace MvcLibraryManagement.Controllers
         DBLibraryEntities db = new DBLibraryEntities();
         public ActionResult Index()
         {
-            var degerler = db.TblMove.ToList();
+            var degerler = db.TblMove.Where(x=>x.TransactionStatus==false).ToList();
             return View(degerler);
         }
         [HttpGet]
@@ -27,6 +27,11 @@ namespace MvcLibraryManagement.Controllers
             db.TblMove.Add(p);
             db.SaveChanges();
             return View();
+        }
+        public ActionResult ReturnBook(int id)
+        {
+            var rtn = db.TblMove.Find(id);
+            return View("ReturnBook", rtn);
         }
         public ActionResult ReturnBookUpdate(TblMove p)
         {

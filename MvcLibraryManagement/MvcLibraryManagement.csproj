@@ -137,13 +137,16 @@
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\LoanController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\OperationController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\WriterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Class\Class1.cs" />
     <Compile Include="Models\Entity\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -162,10 +165,16 @@
     <Compile Include="Models\Entity\sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entity\TblAbout.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entity\TblBook.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\TblCategory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\TblContact.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\TblFine.cs">
@@ -210,6 +219,22 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="web\assets\favicon.ico" />
+    <Content Include="web\assets\img\avataaars.svg" />
+    <Content Include="web\assets\img\library.jpg" />
+    <Content Include="web\assets\img\portfolio\cabin.png" />
+    <Content Include="web\assets\img\portfolio\cake.png" />
+    <Content Include="web\assets\img\portfolio\circus.png" />
+    <Content Include="web\assets\img\portfolio\game.png" />
+    <Content Include="web\assets\img\portfolio\ikisehrinhikayesi.jpg" />
+    <Content Include="web\assets\img\portfolio\kasagı.jpg" />
+    <Content Include="web\assets\img\portfolio\safe.png" />
+    <Content Include="web\assets\img\portfolio\submarine.png" />
+    <Content Include="web\assets\img\portfolio\vurunkahpeye.jpg" />
+    <Content Include="web\assets\img\portfolio\yalnızefe.jpg" />
+    <Content Include="web\css\styles.css" />
+    <Content Include="web\index.html" />
+    <Content Include="web\js\scripts.js" />
     <EntityDeploy Include="Models\Entity\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -261,6 +286,8 @@
     <Content Include="Views\Loan\OnLoan.cshtml" />
     <Content Include="Views\Loan\Index.cshtml" />
     <Content Include="Views\Loan\ReturnBook.cshtml" />
+    <Content Include="Views\Operation\Index.cshtml" />
+    <Content Include="Views\Index\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

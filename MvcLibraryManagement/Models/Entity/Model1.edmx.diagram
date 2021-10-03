@@ -21,6 +21,8 @@
         <AssociationConnector Association="DBLibraryModel.FK_TblMove_TblMember" ManuallyRouted="false" />
         <AssociationConnector Association="DBLibraryModel.FK_TblFine_TblMember1" />
         <AssociationConnector Association="DBLibraryModel.FK_TblMove_TblStaff" />
+        <EntityTypeShape EntityType="DBLibraryModel.TblAbout" Width="1.5" PointX="8.375" PointY="3.75" />
+        <EntityTypeShape EntityType="DBLibraryModel.TblContact" Width="1.5" PointX="6.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
